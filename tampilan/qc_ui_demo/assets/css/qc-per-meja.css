@@ -164,3 +164,8 @@ table thead th:not(:last-child) {
 table tbody td:not(:last-child) {
     box-shadow: inset -1px 0 0 #e2e8f0;
 }
+
+.table-card tbody td {
+    text-align: center;
+    vertical-align: middle;
+}

@@ -1,0 +1,77 @@
+/* ================================
+   BASE RESET (AMAN)
+   ================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ================================
+   GLOBAL TEXT (JANGAN AGRESIF)
+   ================================ */
+
+body {
+    margin: 0;
+    background: #eef1f7;
+
+    /* font global DI SINI, bukan di * */
+    font-family: Inter, Arial, sans-serif;
+    font-size: 14px;
+    color: #111;
+}
+
+/* ================================
+   TOP BAR (NON-QC HEADER)
+   ================================ */
+
+.topbar {
+    height: 64px;
+    background: linear-gradient(90deg, #244fa7, #3c78d8);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+}
+
+.brand {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* ================================
+   PAGE LAYOUT
+   ================================ */
+
+.page {
+    padding: 24px 28px;
+}
+
+/* ================================
+   CARD
+   ================================ */
+
+.card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.04);
+}
+
+/* ================================
+   BUTTON
+   ================================ */
+
+.btn-primary {
+    background: #3c78d8;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}

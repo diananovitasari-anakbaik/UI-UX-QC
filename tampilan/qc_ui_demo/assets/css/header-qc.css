@@ -1,0 +1,54 @@
+/* ================================
+   QC HEADER
+   ================================ */
+
+/* ================================
+   QC HEADER (GRADIENT VERSION)
+   ================================ */
+
+.qc-header {
+    background: linear-gradient(90deg, #244fa7, #3c78d8);
+    padding: 12px 24px;
+    color: #fff;
+}
+
+.qc-header-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+}
+
+/* LEFT */
+.qc-logo {
+    font-weight: 700;
+    font-size: 22px;
+    color: #ffffff;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* CENTER */
+.qc-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+}
+
+/* RIGHT */
+.qc-meta {
+    text-align: right;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.qc-meta .date {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.qc-meta .target {
+    color: #ffdddd;          /* merah lembut */
+    font-weight: 900;
+}

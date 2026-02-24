@@ -1,14 +1,35 @@
 /* ================================
    QC PER-MEJA SPECIFIC STYLE
-   ================================ */
+   CLEAN & TIGHT VERSION
+================================ */
 
-/* TAB */
+/* ================================
+   GLOBAL HEIGHT VARIABLE
+================================ */
+
+:root {
+    --main-header: 64px;
+    --tab-height: 54px;
+    --filter-height: 52px;
+}
+
+
+/* ================================
+   TAB FIXED
+================================ */
+
 .tab-bar {
     display: flex;
     gap: 6px;
-    margin-bottom: -1px;
-    position: relative;
-    z-index: 5;
+    position: fixed;
+    top: var(--main-header);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 28px;
+    background: #eef1f7;
+    height: var(--tab-height);
+    align-items: flex-end;
 }
 
 .tab {
@@ -27,145 +48,414 @@
     color: #2563eb;
 }
 
-/* HEADER BASE */
-.table-card thead th {
-    font-weight: 600;
-    letter-spacing: .5px;
-    text-align: center;
-}
 
-/* IDENTITAS */
-.table-card thead th:nth-child(1),
-.table-card thead th:nth-child(2) {
-    color: #2563eb; /* biru */
-}
+/* ================================
+   FILTER FIXED
+================================ */
 
-/* TARGET & AKTUAL */
-.table-card thead th:nth-child(3),
-.table-card thead th:nth-child(4),
-.table-card thead th:nth-child(5) {
-    color: #7c3aed; /* ungu */
-}
-
-/* BAGUS */
-.table-card thead th:nth-child(6),
-.table-card thead th:nth-child(7) {
-    color: #16a34a; /* hijau */
-}
-
-/* AFKIR */
-.table-card thead th:nth-child(8),
-.table-card thead th:nth-child(9) {
-    color: #dc2626; /* merah */
-}
-
-
-/* FILTER CARD */
 .filter-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 20px;
-    margin-bottom: 14px;
+    padding: 10px 20px; /* dirapetin */
     border-radius: 0 14px 14px 14px;
+    background: #fff;
+    position: fixed;
+    top: calc(var(--main-header) + var(--tab-height));
+    left: 28px;
+    right: 28px;
+    z-index: 999;
+    height: var(--filter-height);
 }
 
-/* filter kiri */
-.filter-card select {
-    padding: 10px 14px;
+.filter-card select,
+.filter-card .search input {
+    padding: 8px 12px;
     border-radius: 8px;
     border: 1px solid #dcdfe6;
-    margin-right: 10px;
-    min-width: 140px;
 }
 
-/* ACTION BAR */
-.action-bar {
+.filter-card select { min-width: 120px; }
+.filter-card .search input { min-width: 260px; }
+
+.filter-wrapper {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 14px;
+    width: 100%;
 }
 
-.action-bar select {
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: 1px solid #dcdfe6;
-    min-width: 160px;
+/* Shift di kiri */
+.shift-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
+/* Filter di tengah (dorong dari kiri) */
+#mejaFilter {
+    margin-left: auto;
+    margin-right: 20px; /* jarak ke search */
+    min-width: 180px;
+}
+
+/* Search tetap kanan */
 .search input {
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: 1px solid #dcdfe6;
     min-width: 240px;
 }
 
-/* TABLE CARD */
-.table-card {
-    padding: 0;
-    overflow: hidden;
+/* ===============================
+   SEARCH CLEAR BUTTON
+================================= */
+
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-/* TABLE */
+.search input {
+    width: 100%;
+    padding: 8px 36px 8px 12px; /* ruang untuk tombol X */
+    border-radius: 8px;
+    border: 1px solid #dcdfe6;
+    font-size: 14px;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 12px;
+    font-size: 14px;
+    color: #888;
+    cursor: pointer;
+    display: none;
+    user-select: none;
+}
+
+.clear-btn:hover {
+    color: #333;
+}
+
+/* ================================
+   SHIFT INFO
+================================ */
+
+.filter-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.shift-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shift-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+}
+
+.shift-badge {
+    padding: 8px 18px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 14px;
+    border: 2px solid #cfd8dc;
+    background: #f5f7fa;
+    color: #333;
+}
+
+.shift-badge.active {
+    background: #3aa0d8;
+    border-color: #3aa0d8;
+    color: #fff;
+}
+
+/* ================================
+   SHIFT INFO (RAPI & MATCH STYLE)
+================================ */
+
+.filter-left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.shift-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.shift-label {
+    font-size: 15px;          /* samakan dengan layout */
+    font-weight: 500;
+    color: #444;
+}
+
+.shift-group {
+    display: flex;
+    gap: 10px;
+}
+
+.shift-badge {
+    padding: 8px 20px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 15px;          /* samakan dengan select */
+    border: 2px solid #cfd8dc;
+    background: #f5f7fa;
+    color: #333;
+    cursor: pointer;
+}
+
+.shift-badge.active {
+    background: #3aa0d8;
+    border-color: #3aa0d8;
+    color: #fff;
+}
+
+/* ================================
+   TABLE CARD
+================================ */
+
+.card.table-card {
+    padding: 0;
+    overflow: visible;
+    width: 100%;
+    background: #fff;
+    border-radius: 14px;
+}
+
+
+/* ================================
+   TABLE
+================================ */
+
 .table-card table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
-.table-card thead {
-    background: #b5cff9;
+/* ================================
+   FIX OFFSET TANPA GAP
+================================ */
+
+.page {
+    padding-top: calc(var(--main-header) + var(--tab-height) + var(--filter-height));
 }
 
-.table-card th {
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #7b8499;
+/* ================================
+   TABLE HEADER STICKY
+================================ */
+
+.table-card thead th {
+    position: sticky;
+    top: calc(var(--main-header) + var(--tab-height) + var(--filter-height));
+    background: #9fb6d9;
+    z-index: 500;
     padding: 14px 16px;
-    text-align: left;
-    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-transform: uppercase;
 }
+
+.table-card thead th:first-child {
+    border-top-left-radius: 14px;
+}
+
+.table-card thead th:last-child {
+    border-top-right-radius: 14px;
+}
+
+
+/* ================================
+   HEADER COLOR
+================================ */
+
+.table-card thead th:nth-child(1),
+.table-card thead th:nth-child(2) { color: #2563eb; }
+
+.table-card thead th:nth-child(3),
+.table-card thead th:nth-child(4),
+.table-card thead th:nth-child(5) { color: #7c3aed; }
+
+.table-card thead th:nth-child(6),
+.table-card thead th:nth-child(7) { color: #16a34a; }
+
+.table-card thead th:nth-child(8),
+.table-card thead th:nth-child(9) { color: #dc2626; }
+
+
+/* ================================
+   BODY
+================================ */
 
 .table-card td {
     padding: 16px;
-    border-bottom: 1px solid #edf0f6;
     font-size: 14px;
-    white-space: nowrap;
+    text-align: center;
+    border-bottom: 1px solid #edf0f6;
+}
+
+.table-card tbody tr:nth-child(even) {
+    background: #dee6f4;
 }
 
 .table-card tr:last-child td {
     border-bottom: none;
 }
 
-/* link meja */
+
+/* ================================
+   LINK
+================================ */
+
 .table-card .link {
     color: #2563eb;
     font-weight: 500;
-    cursor: pointer;
 }
 
-/* yield coloring */
+
+/* ================================
+   BOLD
+================================ */
+
 .table-card td:nth-child(5) {
     font-weight: 600;
 }
 
-.table-card tbody tr:nth-child(even) {
-    background: #f9fbff;
-}
 
-/* ===== FORCE VERTICAL SEPARATOR (FIX REAL) ===== */
+/* ================================
+   COLUMN LINE
+================================ */
 
-/* header */
-table thead th:not(:last-child) {
+.table-card thead th:not(:last-child) {
     box-shadow: inset -1px 0 0 #a7aebd;
 }
 
-/* body */
-table tbody td:not(:last-child) {
+.table-card tbody td:not(:last-child) {
     box-shadow: inset -1px 0 0 #e2e8f0;
 }
 
-.table-card tbody td {
-    text-align: center;
-    vertical-align: middle;
+
+/* ================================
+   WIDTH
+================================ */
+
+.table-card th,
+.table-card td {
+    min-width: 80px;
+}
+
+
+
+
+/* ===============================
+   FIXED FOOTER DASHBOARD
+================================= */
+
+/* Biar konten tabel ga ketutup footer */
+body {
+    padding-bottom: 120px;
+}
+
+/* ===== WRAPPER ===== */
+.qc-dashboard {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 14px;
+    padding: 12px 24px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+    z-index: 9999;
+}
+
+/* ===== CARD ===== */
+.qc-card {
+    flex: 1;
+    max-width: 260px;
+    min-height: 95px;
+    padding: 12px 16px;
+    border-left: 4px solid;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+/* ===== TITLE ===== */
+.qc-card-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+/* ===== MAIN VALUE ===== */
+.qc-card-value {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 6px;
+    color: #222;
+}
+
+/* ===== QC LIST ===== */
+.qc-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 8px;
+    font-size: 12px;
+}
+
+.qc-list span {
+    white-space: nowrap;
+}
+
+.qc-list span::before {
+    content: "• ";
+    color: #888;
+}
+
+/* ===== TEXT ===== */
+.qc-target {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.qc-subtext {
+    font-size: 12px;
+    margin-top: 2px;
+    color: #555;
+}
+
+/* ===== COLORS ===== */
+.bg-blue { border-color: #4e73df; }
+.bg-green { border-color: #1cc88a; }
+.bg-orange { border-color: #f6c23e; }
+.bg-red { border-color: #e74a3b; }
+
+.success {
+    color: #1cc88a;
+    font-weight: 600;
+}
+
+.danger {
+    color: #e74a3b;
+    font-weight: 600;
 }

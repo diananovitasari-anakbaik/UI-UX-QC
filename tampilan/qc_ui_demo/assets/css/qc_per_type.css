@@ -1,0 +1,380 @@
+/* ================================
+   QC PER-MEJA SPECIFIC STYLE
+   CLEAN & TIGHT VERSION
+================================ */
+
+/* ================================
+   GLOBAL HEIGHT VARIABLE
+================================ */
+
+:root {
+    --main-header: 58px;
+    --tab-height: 54px;
+    --filter-height: 52px;
+    --thead-row1: 35.33px;
+    --thead-row2: 35px;
+}
+
+
+/* ================================
+   TAB FIXED
+================================ */
+
+.tab-bar {
+    display: flex;
+    gap: 0;
+    position: fixed;
+    top: var(--main-header);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 28px;
+    background: #eef1f7;
+    height: var(--tab-height);
+    align-items: flex-end;
+}
+
+.tab {
+    padding: 12px 22px;
+    background: #e9eef6;
+    color: #7b8499;
+    border-radius: 12px 12px 0 0;
+    border: 1px solid #dcdfe6;
+    border-bottom: none;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.tab.active {
+    background: #fff;
+    color: #2563eb;
+}
+
+
+/* ================================
+   FILTER FIXED
+================================ */
+
+.filter-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* dirapetin */
+    border-radius: 0 14px 14px 14px;
+    background: #fff;
+    position: fixed;
+    top: calc(var(--main-header) + var(--tab-height));
+    left: 28px;
+    right: 28px;
+    z-index: 999;
+    height: var(--filter-height);
+}
+
+.filter-card select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #dcdfe6;
+}
+
+.filter-card select { min-width: 120px; }
+
+.filter-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Shift di kiri */
+.shift-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Filter di tengah (dorong dari kiri) */
+#typeFilter {
+    margin-left: 0;
+    margin-right: auto; 
+    min-width: 180px;
+}
+
+
+/* ================================
+   TABLE CARD
+================================ */
+
+.card.table-card {
+    padding: 0;
+    overflow: visible;
+    width: 100%;
+    background: #fff;
+    border-radius: 14px;
+}
+.type-sticky{
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 5;
+    font-weight: bold;
+}
+
+.type-sticky td{
+    position: sticky;
+    top: calc(
+        var(--main-header) +
+        var(--tab-height) +
+        var(--filter-height) +
+        var(--thead-row1) +
+        var(--thead-row2)
+    );
+    background: #bcd4f8;
+    z-index: 8;
+}
+
+
+/* ================================
+   TABLE
+================================ */
+
+.table-card table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing:0;
+    table-layout: fixed;
+}
+
+.type-cell{
+    text-align: left !important;
+    padding: 6px 12px;
+}
+
+/* ================================
+   FIX OFFSET TANPA GAP
+================================ */
+
+.page {
+    padding-top: calc(var(--main-header) + var(--tab-height) + var(--filter-height));
+}
+
+/* ================================
+   TABLE HEADER STICKY
+================================ */
+
+/* HEADER BARIS 1 */
+.table-card thead tr:nth-child(1) th{
+    position: sticky;
+    top: calc(
+        var(--main-header) + 
+        var(--tab-height) + 
+        var(--filter-height)
+    );
+    background: #9fb6d9;
+    z-index: 10;
+    padding: 10px 2px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+/* HEADER BARIS 2 */
+.table-card thead tr:nth-child(2) th{
+    position: sticky;
+    top: calc(
+        var(--main-header) + 
+        var(--tab-height) + 
+        var(--filter-height) +
+        var(--thead-row1)
+    );
+    background: #9fb6d9;
+    z-index: 10;
+    padding: 10px 2px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+/* ================================
+   HEADER COLOR
+================================ */
+
+.table-card thead th:nth-child(1),
+.table-card thead th:nth-child(2), 
+.table-card thead th:nth-child(3),
+.table-card thead th:nth-child(4),
+.table-card thead th:nth-child(5),
+.table-card thead th:nth-child(6),
+.table-card thead th:nth-child(7),
+.table-card thead th:nth-child(8),
+.table-card thead th:nth-child(9) { color: #000; }
+
+/* ================================
+   BODY
+================================ */
+
+.table-card td {
+    padding: 16px 5px;
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 1px solid #edf0f6;
+}
+
+.table-card tbody tr:nth-child(even) {
+    background: #dee6f4;
+}
+
+.table-card tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ================================
+   LINK
+================================ */
+
+.table-card .link {
+    color: #2563eb;
+    font-weight: 500;
+}
+
+
+/* ================================
+   BOLD
+================================ */
+
+.table-card td:nth-child(5) {
+    font-weight: 600;
+}
+
+
+/* ================================
+   COLUMN LINE
+================================ */
+
+.table-card thead th {
+    box-shadow: inset 1px 0 0 #9397a1;
+    border-bottom: 1px solid #9397a1;
+}
+
+.table-card tbody td {
+    box-shadow: inset 1px 0 0 #9397a1;
+}
+
+
+/* ================================
+   WIDTH
+================================ */
+
+.table-card th,
+.table-card td {
+    min-width: 80px;
+}
+
+
+
+
+/* ===============================
+   FIXED FOOTER DASHBOARD
+================================= */
+
+/* Biar konten tabel ga ketutup footer */
+body {
+    padding-bottom: 120px;
+}
+
+/* ===== WRAPPER ===== */
+.qc-dashboard {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 14px;
+    padding: 12px 24px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+    z-index: 9999;
+}
+
+/* ===== CARD ===== */
+.qc-card {
+    flex: 1;
+    max-width: 260px;
+    min-height: 95px;
+    padding: 12px 16px;
+    border-left: 4px solid;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+/* ===== TITLE ===== */
+.qc-card-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+/* ===== MAIN VALUE ===== */
+.qc-card-value {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 6px;
+    color: #222;
+}
+
+/* ===== QC LIST ===== */
+.qc-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 8px;
+    font-size: 12px;
+}
+
+.qc-list span {
+    white-space: nowrap;
+}
+
+.qc-list span::before {
+    content: "• ";
+    color: #888;
+}
+
+/* ===== TEXT ===== */
+.qc-target {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.qc-subtext {
+    font-size: 12px;
+    margin-top: 2px;
+    color: #555;
+}
+
+/* ===== COLORS ===== */
+.bg-blue { border-color: #4e73df; }
+.bg-green { border-color: #1cc88a; }
+.bg-orange { border-color: #f6c23e; }
+.bg-red { border-color: #e74a3b; }
+
+.success {
+    color: #1cc88a;
+    font-weight: 600;
+}
+
+.danger {
+    color: #e74a3b;
+    font-weight: 600;
+}

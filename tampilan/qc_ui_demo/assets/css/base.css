@@ -1,17 +1,11 @@
-/* ================================
-   BASE RESET (AMAN)
-   ================================ */
-
+/* -- Base Reset -- */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
 
-/* ================================
-   GLOBAL TEXT (JANGAN AGRESIF)
-   ================================ */
-
+/* -- Global Text -- */
 body {
     margin: 0;
     background: #eef1f7;
@@ -22,10 +16,7 @@ body {
     color: #111;
 }
 
-/* ================================
-   TOP BAR (NON-QC HEADER)
-   ================================ */
-
+/* -- Top Bar -- */
 .topbar {
     height: 64px;
     background: linear-gradient(90deg, #244fa7, #3c78d8);
@@ -40,28 +31,20 @@ body {
     font-weight: 600;
 }
 
-/* ================================
-   PAGE LAYOUT
-   ================================ */
-
+/* -- Page Layout -- */
 .page {
-    padding: 24px 28px;
+    padding: 90px 28px 24px 28px;
 }
 
-/* ================================
-   CARD
-   ================================ */
 
+/* -- Card -- */
 .card {
     background: #fff;
     border-radius: 14px;
     box-shadow: 0 8px 20px rgba(0,0,0,.04);
 }
 
-/* ================================
-   BUTTON
-   ================================ */
-
+/* -- Button -- */
 .btn-primary {
     background: #3c78d8;
     color: #fff;

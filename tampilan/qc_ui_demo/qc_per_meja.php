@@ -70,7 +70,7 @@ foreach ($rows as $r) {
 
 <div class="tab-bar">
     <a href="qc_per_meja.php" class="tab active">Laporan Per-Meja</a>
-    <a href="qc_per_type.php" class="tab">Laporan Per-Type</a>
+    <a href="qc-per-type.php" class="tab">Laporan Per-Type</a>
 </div>
 
 <div class="card filter-card">
@@ -262,3 +262,4 @@ refreshRowColor();
 
 </body>
 </html>
+

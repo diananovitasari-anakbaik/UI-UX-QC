@@ -40,7 +40,7 @@ $persen_tidak          = 47.1;
 
 <div class="qc-dashboard">
 
-    <!-- TOTAL SHIFT B -->
+    <!-- Total Shift B -->
     <div class="qc-card bg-blue">
         <div class="qc-card-title">Total Kirim Shift B</div>
         <div class="qc-card-value"><?= $total_kirim_shift_b ?></div>
@@ -51,7 +51,7 @@ $persen_tidak          = 47.1;
         </div>
     </div>
 
-    <!-- TOTAL ALL -->
+    <!-- Total All -->
     <div class="qc-card bg-green">
         <div class="qc-card-title">Total Kirim All</div>
         <div class="qc-card-value"><?= $total_kirim_all ?></div>
@@ -62,7 +62,7 @@ $persen_tidak          = 47.1;
         </div>
     </div>
 
-    <!-- MEJA -->
+    <!-- Meja -->
     <div class="qc-card bg-orange">
         <div class="qc-card-title">Status Meja Aktif</div>
         <div class="qc-card-value"><?= $meja_aktif ?> / <?= $total_meja ?></div>
@@ -71,7 +71,7 @@ $persen_tidak          = 47.1;
         </div>
     </div>
 
-    <!-- TARGET -->
+    <!-- Target -->
     <div class="qc-card bg-red">
     <div class="qc-card-title">PENCAPAIAN TARGET</div>
 

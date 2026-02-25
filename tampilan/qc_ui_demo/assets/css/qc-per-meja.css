@@ -1,11 +1,7 @@
-/* ================================
-   QC PER-MEJA SPECIFIC STYLE
-   CLEAN & TIGHT VERSION
-================================ */
+/* QC PER-MEJA SPECIFIC STYLE */
 
-/* ================================
-   GLOBAL HEIGHT VARIABLE
-================================ */
+
+/* -- Global Height Variable -- */
 
 :root {
     --main-header: 64px;
@@ -14,9 +10,7 @@
 }
 
 
-/* ================================
-   TAB FIXED
-================================ */
+/* -- Tab Fixed -- */
 
 .tab-bar {
     display: flex;
@@ -49,9 +43,7 @@
 }
 
 
-/* ================================
-   FILTER FIXED
-================================ */
+/* -- Filter Fixed -- */
 
 .filter-card {
     display: flex;
@@ -103,9 +95,7 @@
     min-width: 240px;
 }
 
-/* ===============================
-   SEARCH CLEAR BUTTON
-================================= */
+/* -- Search Clear Button -- */
 
 .search {
     position: relative;
@@ -135,47 +125,7 @@
     color: #333;
 }
 
-/* ================================
-   SHIFT INFO
-================================ */
-
-.filter-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.shift-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.shift-label {
-    font-size: 14px;
-    font-weight: 500;
-    color: #444;
-}
-
-.shift-badge {
-    padding: 8px 18px;
-    border-radius: 14px;
-    font-weight: 600;
-    font-size: 14px;
-    border: 2px solid #cfd8dc;
-    background: #f5f7fa;
-    color: #333;
-}
-
-.shift-badge.active {
-    background: #3aa0d8;
-    border-color: #3aa0d8;
-    color: #fff;
-}
-
-/* ================================
-   SHIFT INFO (RAPI & MATCH STYLE)
-================================ */
+/* -- Shift Info -- */
 
 .filter-left {
     display: flex;
@@ -202,7 +152,7 @@
 
 .shift-badge {
     padding: 8px 20px;
-    border-radius: 14px;
+    border-radius: 8px;
     font-weight: 600;
     font-size: 15px;          /* samakan dengan select */
     border: 2px solid #cfd8dc;
@@ -212,14 +162,12 @@
 }
 
 .shift-badge.active {
-    background: #3aa0d8;
-    border-color: #3aa0d8;
+    background: #3a7cd8;
+    border-color: #3a5ad8;
     color: #fff;
 }
 
-/* ================================
-   TABLE CARD
-================================ */
+/* -- Table Card -- */
 
 .card.table-card {
     padding: 0;
@@ -230,9 +178,7 @@
 }
 
 
-/* ================================
-   TABLE
-================================ */
+/* -- Table Style -- */
 
 .table-card table {
     width: 100%;
@@ -240,17 +186,13 @@
     table-layout: fixed;
 }
 
-/* ================================
-   FIX OFFSET TANPA GAP
-================================ */
+/* -- Fix Overlap Header -- */
 
 .page {
     padding-top: calc(var(--main-header) + var(--tab-height) + var(--filter-height));
 }
 
-/* ================================
-   TABLE HEADER STICKY
-================================ */
+/* -- Table Header Fixed sticky -- */
 
 .table-card thead th {
     position: sticky;
@@ -273,9 +215,7 @@
 }
 
 
-/* ================================
-   HEADER COLOR
-================================ */
+/* -- Header Table Color -- */
 
 .table-card thead th:nth-child(1),
 .table-card thead th:nth-child(2) { color: #2563eb; }
@@ -291,9 +231,7 @@
 .table-card thead th:nth-child(9) { color: #dc2626; }
 
 
-/* ================================
-   BODY
-================================ */
+/* -- Body Table -- */
 
 .table-card td {
     padding: 16px;
@@ -330,9 +268,7 @@
 }
 
 
-/* ================================
-   COLUMN LINE
-================================ */
+/* -- Column Line -- */
 
 .table-card thead th:not(:last-child) {
     box-shadow: inset -1px 0 0 #a7aebd;
@@ -343,9 +279,7 @@
 }
 
 
-/* ================================
-   WIDTH
-================================ */
+/* -- Width -- */
 
 .table-card th,
 .table-card td {
@@ -355,9 +289,7 @@
 
 
 
-/* ===============================
-   FIXED FOOTER DASHBOARD
-================================= */
+/* -- Footer Summary -- */
 
 /* Biar konten tabel ga ketutup footer */
 body {

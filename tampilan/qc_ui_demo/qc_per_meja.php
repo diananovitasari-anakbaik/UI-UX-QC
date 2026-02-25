@@ -1,17 +1,33 @@
 <?php
-// DATA DUMMY QC-12
+// DATA INI HANYA DUMMY QC-12
 $rows = [
 
 ['meja'=>'Gerindra','type'=>'QC-01','ok'=>180,'ng'=>20],
 ['meja'=>'Gerindra','type'=>'QC-01','ok'=>160,'ng'=>40],
 ['meja'=>'Gerindra','type'=>'QC-01','ok'=>170,'ng'=>30],
 ['meja'=>'Cek Ulang','type'=>'QC-01','ok'=>95,'ng'=>5],
+['meja'=>'Cek Ulang','type'=>'QC-01','ok'=>90,'ng'=>10],
+['meja'=>'Cek Ulang','type'=>'QC-01','ok'=>85,'ng'=>15],
+['meja'=>'Perbaikan','type'=>'QC-01','ok'=>130,'ng'=>70],
+['meja'=>'Perbaikan','type'=>'QC-01','ok'=>140,'ng'=>60],
 ['meja'=>'Perbaikan','type'=>'QC-01','ok'=>150,'ng'=>50],
 
 ['meja'=>'Gerindra','type'=>'QC-02','ok'=>190,'ng'=>10],
 ['meja'=>'Gerindra','type'=>'QC-02','ok'=>195,'ng'=>5],
+['meja'=>'Gerindra','type'=>'QC-02','ok'=>185,'ng'=>15],
 ['meja'=>'Cek Ulang','type'=>'QC-02','ok'=>80,'ng'=>20],
+['meja'=>'Cek Ulang','type'=>'QC-02','ok'=>85,'ng'=>15],
+['meja'=>'Cek Ulang','type'=>'QC-02','ok'=>75,'ng'=>25],
+['meja'=>'Perbaikan','type'=>'QC-02','ok'=>160,'ng'=>40],
+['meja'=>'Perbaikan','type'=>'QC-02','ok'=>155,'ng'=>45],
+['meja'=>'Perbaikan','type'=>'QC-02','ok'=>165,'ng'=>35],
 
+];
+
+// target per type nya (BISA DIGANTI NANTI DARI DATABASE)
+$targetPerType = [
+    'QC-01' => 200,
+    'QC-02' => 300
 ];
 
 // GROUP BY MEJA -> TYPE
@@ -23,7 +39,6 @@ foreach ($rows as $r) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -33,7 +48,7 @@ foreach ($rows as $r) {
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/qc-per-meja.css">
 <link rel="stylesheet" href="assets/css/header-qc.css">
-<link rel="stylesheet" href="assets/css/search-clear.css"> <!-- CSS BARU -->
+<link rel="stylesheet" href="assets/css/search-clear.css">
 
 <style>
 .no-col {
@@ -60,7 +75,6 @@ foreach ($rows as $r) {
 
 <div class="card filter-card">
 
-    <!-- SHIFT -->
     <div class="shift-info">
         <span class="shift-label">Shift yang sedang berjalan :</span>
         <div class="shift-group">
@@ -69,7 +83,6 @@ foreach ($rows as $r) {
         </div>
     </div>
 
-    <!-- FILTER MEJA -->
     <select id="mejaFilter">
         <option value="ALL">SEMUA MEJA</option>
         <option value="GERINDRA">GERINDRA</option>
@@ -77,7 +90,6 @@ foreach ($rows as $r) {
         <option value="PERBAIKAN">PERBAIKAN</option>
     </select>
 
-    <!-- SEARCH DENGAN CLEAR BUTTON -->
     <div class="search">
         <input type="text" id="searchInput" placeholder="Find meja / operator">
         <span class="clear-btn" id="clearBtn">✕</span>
@@ -91,7 +103,6 @@ foreach ($rows as $r) {
 <tr>
 <th>NO</th>
 <th>MEJA</th>
-<th>TYPE</th>
 <th>TARGET</th>
 <th>AKTUAL</th>
 <th>%</th>
@@ -110,6 +121,7 @@ foreach ($qcList as $qc => $data):
 
 $counter = 1;
 $totalTarget = 0;
+$totalAktual = 0;
 $totalOK = 0;
 $totalNG = 0;
 $prefix = ($qc === 'QC-01') ? 100 : 200;
@@ -117,22 +129,29 @@ $prefix = ($qc === 'QC-01') ? 100 : 200;
 foreach ($data as $r):
 
 $no = $prefix + $counter;
-$target = $r['ok'] + $r['ng'];
-$pctOK = round($r['ok'] / $target * 100);
-$pctNG = round($r['ng'] / $target * 100);
+
+$target = $targetPerType[$qc]; // target fix
+$aktual = $r['ok'] + $r['ng']; // aktual sebenarnya dari data
+
+$pctAktual = round(($aktual / $target) * 100);
+$pctOK = round(($r['ok'] / $aktual) * 100);
+$pctNG = round(($r['ng'] / $aktual) * 100);
+
+// emot berdassarkan pencapaian aktual terhadap target
+$emoji = ($pctAktual < 80) ? "😟" : "😄";
 
 $totalTarget += $target;
+$totalAktual += $aktual;
 $totalOK += $r['ok'];
 $totalNG += $r['ng'];
 ?>
 
 <tr data-meja="<?= strtoupper($meja) ?>">
 <td class="no-col"><?= $no ?></td>
-<td><?= $r['meja'] ?></td>
-<td><?= $qc ?></td>
+<td><?= $emoji ?> <?= $r['meja'] ?></td>
 <td><?= $target ?></td>
-<td><?= $target ?></td>
-<td>100%</td>
+<td><?= $aktual ?></td>
+<td><?= $pctAktual ?>%</td>
 <td><?= $r['ok'] ?></td>
 <td><?= $pctOK ?>%</td>
 <td><?= $r['ng'] ?></td>
@@ -143,16 +162,19 @@ $totalNG += $r['ng'];
 $counter++;
 endforeach;
 
-$totalPctOK = round($totalOK / $totalTarget * 100);
-$totalPctNG = round($totalNG / $totalTarget * 100);
+$totalPctAktual = round(($totalAktual / $totalTarget) * 100);
+$totalPctOK = round(($totalOK / $totalAktual) * 100);
+$totalPctNG = round(($totalNG / $totalAktual) * 100);
+
+
 ?>
 
 <tr class="total-row" data-meja="<?= strtoupper($meja) ?>">
 <td></td>
-<td colspan="2">TOTAL</td>
+<td>TOTAL</td>
 <td><?= $totalTarget ?></td>
-<td><?= $totalTarget ?></td>
-<td>100%</td>
+<td><?= $totalAktual ?></td>
+<td><?= $totalPctAktual ?>%</td>
 <td><?= $totalOK ?></td>
 <td><?= $totalPctOK ?>%</td>
 <td><?= $totalNG ?></td>
@@ -173,7 +195,6 @@ const mejaFilter = document.getElementById("mejaFilter");
 const clearBtn = document.getElementById("clearBtn");
 
 function applyFilter() {
-
     const keyword = searchInput.value.toLowerCase();
     const mejaVal = mejaFilter.value;
 
@@ -193,6 +214,31 @@ function applyFilter() {
             row.style.display =
                 (matchMeja && matchSearch) ? "" : "none";
         });
+
+    refreshRowColor(); //penting
+}
+
+function refreshRowColor() {
+
+    const rows = document.querySelectorAll(".table-card tbody tr");
+    let visibleIndex = 0;
+
+    rows.forEach(row => {
+
+        // skip yang di-hide
+        if (row.style.display === "none") return;
+
+        // skip total row biar tetap hijau
+        if (row.classList.contains("total-row")) return;
+
+        if (visibleIndex % 2 === 0) {
+            row.style.background = "#ffffff";
+        } else {
+            row.style.background = "#e5edf7"; // warna biru muda untuk row genap
+        }
+
+        visibleIndex++;
+    });
 }
 
 searchInput.addEventListener("input", function() {
@@ -207,6 +253,9 @@ clearBtn.addEventListener("click", function() {
 });
 
 mejaFilter.addEventListener("change", applyFilter);
+
+// jalankan sekali saat halaman load
+refreshRowColor();
 </script>
 
 <?php include 'qc-summary-footer.php'; ?>

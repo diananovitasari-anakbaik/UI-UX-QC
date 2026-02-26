@@ -2,28 +2,34 @@
 
 
 /* -- Global Height Variable -- */
+/*
+:root = tempat deklarasi variabel global CSS.
+Semua var() bisa dipakai di seluruh file.
 
+Pakai variabel supaya kalau tinggi header berubah,
+cukup ubah 1 angka saja di sini.
+*/
 :root {
-    --main-header: 64px;
-    --tab-height: 54px;
-    --filter-height: 52px;
+    --main-header: 64px;   /* Tinggi header utama paling atas */
+    --tab-height: 54px;    /* Tinggi bar tab (Laporan Per-Meja / Per-Type) */
+    --filter-height: 52px; /* Tinggi area filter (shift + select + search) */
 }
 
 
 /* -- Tab Fixed -- */
 
 .tab-bar {
-    display: flex;
-    gap: 6px;
-    position: fixed;
-    top: var(--main-header);
+    display: flex;            /* susun horizontal */
+    gap: 6px;                 /* jarak antar tab */
+    position: fixed;          /* selalu nempel di atas */
+    top: var(--main-header);  /* mulai tepat di bawah header utama */
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 1000;            /* prioritas layer tinggi */
     padding: 0 28px;
     background: #eef1f7;
     height: var(--tab-height);
-    align-items: flex-end;
+    align-items: flex-end;    /* tab menempel bawah */
 }
 
 .tab {
@@ -32,7 +38,7 @@
     color: #7b8499;
     border-radius: 12px 12px 0 0;
     border: 1px solid #dcdfe6;
-    border-bottom: none;
+    border-bottom: none;        /* biar nyatu dengan card */
     text-decoration: none;
     font-weight: 500;
 }
@@ -49,16 +55,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px; /* dirapetin */
+    padding: 10px 20px; /*dirapetkan dengan tab*/
     border-radius: 0 14px 14px 14px;
     background: #fff;
     position: fixed;
+
+    /*
+    POSISI FILTER:
+
+    top = header + tab
+    64px + 54px = 118px
+    */
+
     top: calc(var(--main-header) + var(--tab-height));
     left: 28px;
     right: 28px;
     z-index: 999;
     height: var(--filter-height);
 }
+
+/*
+calc() = menghitung otomatis tinggi.
+Kalau header berubah → posisi ikut berubah.
+*/
+
 
 .filter-card select,
 .filter-card .search input {
@@ -187,7 +207,12 @@
 }
 
 /* -- Fix Overlap Header -- */
+/*
+Supaya isi tabel tidak ketutup header + tab + filter.
 
+padding-top =
+64 + 54 + 52 = 170px
+*/
 .page {
     padding-top: calc(var(--main-header) + var(--tab-height) + var(--filter-height));
 }
@@ -249,19 +274,8 @@
 }
 
 
-/* ================================
-   LINK
-================================ */
 
-.table-card .link {
-    color: #2563eb;
-    font-weight: 500;
-}
-
-
-/* ================================
-   BOLD
-================================ */
+/*-- Bold --*/
 
 .table-card td:nth-child(5) {
     font-weight: 600;
@@ -271,7 +285,7 @@
 /* -- Column Line -- */
 
 .table-card thead th:not(:last-child) {
-    box-shadow: inset -1px 0 0 #a7aebd;
+    box-shadow: inset -1px 0 0 #a3aab8;
 }
 
 .table-card tbody td:not(:last-child) {
@@ -299,7 +313,7 @@ body {
 /* ===== WRAPPER ===== */
 .qc-dashboard {
     position: fixed;
-    bottom: 0;
+    bottom: 0; /*nempel di bawah*/
     left: 0;
     width: 100%;
     background: rgba(255,255,255,0.96);
@@ -310,7 +324,7 @@ body {
     gap: 14px;
     padding: 12px 24px;
     box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
-    z-index: 9999;
+    z-index: 9999; /* paling atas */
 }
 
 /* ===== CARD ===== */
@@ -377,6 +391,7 @@ body {
 }
 
 /* ===== COLORS ===== */
+/* hanya ubah warna border kiri */
 .bg-blue { border-color: #4e73df; }
 .bg-green { border-color: #1cc88a; }
 .bg-orange { border-color: #f6c23e; }

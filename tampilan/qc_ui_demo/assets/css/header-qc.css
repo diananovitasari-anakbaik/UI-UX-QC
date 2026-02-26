@@ -1,22 +1,28 @@
 /* -- QC HEADER -- */
 
 .qc-header {
-    background: linear-gradient(90deg, #244fa7, #3c78d8);
+    background: linear-gradient(90deg, #244fa7, #3c78d8);  /* Background gradasi biru horizontal. 90deg = kiri → kanan */
     padding: 12px 24px;
     color: #fff;
-    position: fixed;
+    position: fixed;  /* position: fixed → header selalu menempel di atas top: 0 → mulai dari paling atas layar */
     top: 0;
     left: 0;
     width: 100%;
     height: 64px;
-    z-index: 99999;
+    z-index: 99999; /* paling atas dari semua layer */
 }
 
 
 .qc-header-inner {
+    /*
+    Grid 3 kolom:
+    auto   → logo (lebar sesuai isi)
+    1fr    → title (mengisi sisa ruang)
+    auto   → meta kanan
+    */
     display: grid;
     grid-template-columns: auto 1fr auto;
-    align-items: center;
+    align-items: center; /* vertical center */
     gap: 16px;
 }
 
@@ -33,7 +39,7 @@
     text-align: center;
     font-weight: 700;
     font-size: 16px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.5px; /* spasi antar huruf */
     color: #ffffff;
 }
 
@@ -41,14 +47,16 @@
 .qc-meta {
     text-align: right;
     font-size: 12px;
-    line-height: 1.4;
+    line-height: 1.4; /* jarak antar baris */
 }
 
+/* Tanggal */
 .qc-meta .date {
     color: #ffffff;
     font-weight: 600;
 }
 
+/* Target info */
 .qc-meta .target {
     color: #ffdddd;          /* merah lembut */
     font-weight: 900;

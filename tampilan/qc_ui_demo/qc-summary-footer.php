@@ -1,3 +1,4 @@
+<!--DATA DUMMY UNTUK SUMMARY FOOTER-->
 <?php
 $total_kirim_shift_b = "1,605";
 $total_kirim_all     = "1,801";

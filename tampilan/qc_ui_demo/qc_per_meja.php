@@ -24,7 +24,7 @@ $rows = [
 
 ];
 
-// target per type nya (BISA DIGANTI NANTI DARI DATABASE)
+// target per type nya (BISA DIGANTI NANTI YA DARI DATABASE :) )
 $targetPerType = [
     'QC-01' => 200,
     'QC-02' => 300
@@ -39,6 +39,7 @@ foreach ($rows as $r) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -70,7 +71,7 @@ foreach ($rows as $r) {
 
 <div class="tab-bar">
     <a href="qc_per_meja.php" class="tab active">Laporan Per-Meja</a>
-    <a href="qc-per-type.php" class="tab">Laporan Per-Type</a>
+    <a href="qc_per_type.php" class="tab">Laporan Per-Type</a>
 </div>
 
 <div class="card filter-card">
@@ -194,6 +195,15 @@ const searchInput = document.getElementById("searchInput");
 const mejaFilter = document.getElementById("mejaFilter");
 const clearBtn = document.getElementById("clearBtn");
 
+
+
+//--FUNGSI: applyFilter()--//
+// Fungsi utama untuk memfilter tabel berdasarkan:
+// 1. Dropdown pilihan meja
+// 2. Keyword pencarian (search input)
+// Akan menyembunyikan atau menampilkan baris sesuai filter
+// Lalu memanggil refreshRowColor() agar warna tetap rapi
+
 function applyFilter() {
     const keyword = searchInput.value.toLowerCase();
     const mejaVal = mejaFilter.value;
@@ -218,6 +228,14 @@ function applyFilter() {
     refreshRowColor(); //penting
 }
 
+
+
+//--FUNGSI: refreshRowColor()--//
+// Mengatur ulang warna baris tabel (striping effect)
+// - Melewati baris yang di-hide
+// - Melewati baris total (tetap hijau)
+// - Memberikan warna selang-seling putih & biru muda
+
 function refreshRowColor() {
 
     const rows = document.querySelectorAll(".table-card tbody tr");
@@ -241,17 +259,31 @@ function refreshRowColor() {
     });
 }
 
+
+//--EVENT: SEARCH INPUT--//
+// Saat user mengetik:
+// - Tampilkan tombol clear jika ada isi
+// - Jalankan filter
 searchInput.addEventListener("input", function() {
     clearBtn.style.display = this.value ? "block" : "none";
     applyFilter();
 });
 
+
+//--EVENT: CLEAR BUTTON --//
+// Saat tombol clear diklik:
+// - Kosongkan search
+// - Sembunyikan tombol clear
+// - Reset filter
 clearBtn.addEventListener("click", function() {
     searchInput.value = "";
     clearBtn.style.display = "none";
     applyFilter();
 });
 
+
+//--EVENT: DROPDOWN FILTER MEJA--//
+// Saat pilihan meja berubah → jalankan filter ulang
 mejaFilter.addEventListener("change", applyFilter);
 
 // jalankan sekali saat halaman load
@@ -262,4 +294,3 @@ refreshRowColor();
 
 </body>
 </html>
-

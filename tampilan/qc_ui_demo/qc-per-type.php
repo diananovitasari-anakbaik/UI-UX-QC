@@ -38,6 +38,18 @@ $rows = [
 ],
 
 [
+    'operation' => 'PL',
+    'type'      => 'C230',
+    'aktual'    => 23,
+    'bagus'     => 0,
+    'afkir'     => 0,
+
+    'D'=>1,'M'=>1,'LA'=>0,'LB'=>1,'R'=>0,'F'=>1,'K'=>0,'P'=>4,'G'=>1,
+    'N'=>0,'V'=>0,'E'=>1,'YA'=>1,'YB'=>0,'ZB'=>0,'ZC'=>0,'H'=>1,'S'=>0,
+    'S1'=>0,'I'=>0,'B'=>2,'ZA'=>0,'YC'=>1,'YD'=>0,'T'=>1,'S2'=>0,'Z'=>0
+],
+
+[
     'operation' => 'Perbaikan',
     'type'      => 'C230',
     'meja'      => '140',
@@ -113,20 +125,6 @@ $rows = [
 
 [
     'type'      => 'C231',
-    'operation' => 'Gerinda',
-    'meja'      => '210',
-    'pb'        => 1,
-    'aktual'    => 150,
-    'bagus'     => 135,
-    'afkir'     => 15,
-
-    'D'=>1,'M'=>1,'LA'=>0,'LB'=>0,'R'=>1,'F'=>1,'K'=>0,'P'=>2,'G'=>1,
-    'N'=>0,'V'=>0,'E'=>0,'YA'=>1,'YB'=>0,'ZB'=>0,'ZC'=>0,'H'=>1,'S'=>0,
-    'S1'=>0,'I'=>0,'B'=>1,'ZA'=>0,'YC'=>0,'YD'=>0,'T'=>1,'S2'=>0,'Z'=>0
-],
-
-[
-    'type'      => 'C231',
     'operation' => 'Perbaikan',
     'meja'      => '220',
     'pb'        => 1,
@@ -136,6 +134,20 @@ $rows = [
 
     'D'=>0,'M'=>0,'LA'=>0,'LB'=>0,'R'=>0,'F'=>1,'K'=>0,'P'=>1,'G'=>0,
     'N'=>0,'V'=>0,'E'=>0,'YA'=>0,'YB'=>0,'ZB'=>0,'ZC'=>0,'H'=>1,'S'=>0,
+    'S1'=>0,'I'=>0,'B'=>1,'ZA'=>0,'YC'=>0,'YD'=>0,'T'=>1,'S2'=>0,'Z'=>0
+],
+
+[
+    'type'      => 'C231',
+    'operation' => 'Gerinda',
+    'meja'      => '210',
+    'pb'        => 1,
+    'aktual'    => 150,
+    'bagus'     => 135,
+    'afkir'     => 15,
+
+    'D'=>1,'M'=>1,'LA'=>0,'LB'=>0,'R'=>1,'F'=>1,'K'=>0,'P'=>2,'G'=>1,
+    'N'=>0,'V'=>0,'E'=>0,'YA'=>1,'YB'=>0,'ZB'=>0,'ZC'=>0,'H'=>1,'S'=>0,
     'S1'=>0,'I'=>0,'B'=>1,'ZA'=>0,'YC'=>0,'YD'=>0,'T'=>1,'S2'=>0,'Z'=>0
 ],
 
@@ -283,8 +295,22 @@ foreach ($group as $type => $operations):
             TYPE : <?= $type ?>
         </td>
     </tr>
+    <?php
+        $periksaTotal = [
+            'aktual' => 0,
+            'bagus'  => 0,
+            'afkir'  => 0,
+            'defect' => array_fill_keys($defects, 0)
+        ];
 
+        $plTotal = [
+            'aktual' => 0,
+            'defect' => array_fill_keys($defects, 0)
+        ];
+    ?>
     <?php foreach ($operations as $operation => $rows): ?>
+
+    
 
         <?php
         $rowspan = count($rows);
@@ -312,7 +338,27 @@ foreach ($group as $type => $operations):
             foreach ($defects as $d) {
                 $totalDefect[$d] += $r[$d];
             }
+            if (trim(strtolower($operation)) === 'periksa') {
+
+                $periksaTotal['aktual'] += $aktual;
+                $periksaTotal['bagus'] += $bagus;
+                $periksaTotal['afkir']  += $afkir;
+
+                foreach ($defects as $d) {
+                    $periksaTotal['defect'][$d] += $r[$d];
+                }
+            }
+            
+            if (trim(strtolower($operation)) === 'pl') {
+
+                $plTotal['aktual'] += $aktual;
+
+                foreach ($defects as $d) {
+                    $plTotal['defect'][$d] += $r[$d];
+                }
+            }
         ?>
+
 
         <tr data-type="<?= $type ?>">
 
@@ -323,17 +369,17 @@ foreach ($group as $type => $operations):
                 </td>
             <?php endif; ?>
 
-            <td><?= $r['meja'] ?></td>
-            <td><?= $r['pb'] ?></td>
-            <td><?= $aktual ?></td>
+            <td><?= $r['meja']??'' ?></td>
+            <td><?= $r['pb']??'' ?></td>
+            <td><?= $aktual ??'' ?></td>
 
             <!-- BAGUS -->
-            <td><?= $bagus ?></td>
-            <td><?= $pctBagus ?>%</td>
+            <td><?= (trim(strtolower($operation)) === 'pl') ? '' : $bagus ?></td>
+            <td><?= (trim(strtolower($operation)) === 'pl') ? '' : $pctBagus . '%' ?></td>
 
             <!-- AFKIR -->
-            <td><?= $afkir ?></td>
-            <td><?= $pctAfkir ?>%</td>
+            <td><?= (trim(strtolower($operation)) === 'pl') ? '' : $afkir ?></td>
+            <td><?= (trim(strtolower($operation)) === 'pl') ? '' : $pctAfkir . '%' ?></td>
 
             <!-- DETAIL DEFECT -->
             <?php foreach ($defects as $d): ?>
@@ -349,16 +395,45 @@ foreach ($group as $type => $operations):
 
         <!-- TOTAL PER OPERATION -->
         <tr class="total-row" data-type="<?= $type ?>">
-            <td colspan="3">TOTAL <?= $operation ?></td>
-            <td><?= $totalAktual ?></td>
-            <td><?= $totalBagus ?></td>
-            <td><?= $totalAktual ? round($totalBagus/$totalAktual*100) : 0 ?>%</td>
-            <td><?= $totalAfkir ?></td>
-            <td><?= $totalAktual ? round($totalAfkir/$totalAktual*100) : 0 ?>%</td>
+            <td colspan="3">
+                <?php if (trim(strtolower($operation)) === 'pl'): ?>
+                    TOTAL SETELAH PL
+                <?php else: ?>
+                    TOTAL <?= $operation ?>
+                <?php endif; ?>
+            </td>
 
-            <?php foreach ($defects as $d): ?>
-                <td><?= $totalDefect[$d] ?></td>
-            <?php endforeach; ?>
+            <?php if (trim(strtolower($operation)) === 'pl'): ?>
+
+                <?php
+                $finalAktual = $periksaTotal['aktual'] - $plTotal['aktual'];
+                $finalBagus  = $periksaTotal['bagus'];
+                $finalAfkir  = $periksaTotal['afkir']  - $plTotal['aktual'];
+                ?>
+
+                <td><?= $finalAktual ?></td>
+                <td><?= $finalBagus ?></td>
+                <td><?= $finalAktual ? round($finalBagus/$finalAktual*100) : 0 ?>%</td>
+                <td><?= $finalAfkir ?></td>
+                <td><?= $finalAktual ? round($finalAfkir/$finalAktual*100) : 0 ?>%</td>
+
+                <?php foreach ($defects as $d): ?>
+                    <td><?= $periksaTotal['defect'][$d] - $plTotal['defect'][$d] ?></td>
+                <?php endforeach; ?>
+
+            <?php else: ?>
+
+                <td><?= $totalAktual ?></td>
+                <td><?= $totalBagus ?></td>
+                <td><?= $totalAktual ? round($totalBagus/$totalAktual*100) : 0 ?>%</td>
+                <td><?= $totalAfkir ?></td>
+                <td><?= $totalAktual ? round($totalAfkir/$totalAktual*100) : 0 ?>%</td>
+
+                <?php foreach ($defects as $d): ?>
+                    <td><?= $totalDefect[$d] ?></td>
+                <?php endforeach; ?>
+
+            <?php endif; ?>
         </tr>
 
     <?php endforeach; ?>

@@ -2,9 +2,9 @@
 // DATA INI HANYA DUMMY QC-12
 $rows = [
 
-['meja'=>'Gerindra','type'=>'QC-01','ok'=>180,'ng'=>20],
-['meja'=>'Gerindra','type'=>'QC-01','ok'=>160,'ng'=>40],
-['meja'=>'Gerindra','type'=>'QC-01','ok'=>170,'ng'=>30],
+['meja'=>'Gerinda','type'=>'QC-01','ok'=>180,'ng'=>20],
+['meja'=>'Gerinda','type'=>'QC-01','ok'=>160,'ng'=>40],
+['meja'=>'Gerinda','type'=>'QC-01','ok'=>170,'ng'=>30],
 ['meja'=>'Cek Ulang','type'=>'QC-01','ok'=>95,'ng'=>5],
 ['meja'=>'Cek Ulang','type'=>'QC-01','ok'=>90,'ng'=>10],
 ['meja'=>'Cek Ulang','type'=>'QC-01','ok'=>85,'ng'=>15],
@@ -12,9 +12,9 @@ $rows = [
 ['meja'=>'Perbaikan','type'=>'QC-01','ok'=>140,'ng'=>60],
 ['meja'=>'Perbaikan','type'=>'QC-01','ok'=>150,'ng'=>50],
 
-['meja'=>'Gerindra','type'=>'QC-02','ok'=>190,'ng'=>10],
-['meja'=>'Gerindra','type'=>'QC-02','ok'=>195,'ng'=>5],
-['meja'=>'Gerindra','type'=>'QC-02','ok'=>185,'ng'=>15],
+['meja'=>'Gerinda','type'=>'QC-02','ok'=>190,'ng'=>10],
+['meja'=>'Gerinda','type'=>'QC-02','ok'=>195,'ng'=>5],
+['meja'=>'Gerinda','type'=>'QC-02','ok'=>185,'ng'=>15],
 ['meja'=>'Cek Ulang','type'=>'QC-02','ok'=>80,'ng'=>20],
 ['meja'=>'Cek Ulang','type'=>'QC-02','ok'=>85,'ng'=>15],
 ['meja'=>'Cek Ulang','type'=>'QC-02','ok'=>75,'ng'=>25],
@@ -86,7 +86,7 @@ foreach ($rows as $r) {
 
     <select id="mejaFilter">
         <option value="ALL">SEMUA MEJA</option>
-        <option value="GERINDRA">GERINDRA</option>
+        <option value="GERINDA">GERINDA</option>
         <option value="CEK ULANG">CEK ULANG</option>
         <option value="PERBAIKAN">PERBAIKAN</option>
     </select>
